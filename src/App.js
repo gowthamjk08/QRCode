@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+export default function App(){
+  let [img,setImg] = useState("");
+    function gen(){    
+      let inputValue = document.getElementById('link');
+      let sizeValue = document.getElementById('size');    
+        setImg(`http://api.qrserver.com/v1/create-qr-code/?data=${inputValue.value}!&size=${sizeValue.value}x${sizeValue.value}`)
+    }
+    return <div>
+    <h1>QR Code Genarator</h1>
+    {img && <img src={img}/>}
+    <label htmlFor="link">Enter The Value</label>
+    <input type="text" id="link"/>
+    
+    <label htmlFor="size">Enter The Size</label>
+    <input type="text" id="size"/>
+
+    <button onClick={gen}> Genarate QR Code</button>
     </div>
-  );
 }
 
-export default App;
